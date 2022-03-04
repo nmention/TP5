@@ -1,5 +1,8 @@
 #Test
 from networkx import *
+import matplotlib.pyplot as plt
+from itertools import combinations
+
 liste = []
 
 def readFile():
@@ -9,9 +12,8 @@ def readFile():
 readFile()
 
 class Graphe:
-    def __init__(self,nodes):
-        self.nodes = nodes()
-        self.graph = Graph(nodes)
+    def __init__(self):
+        self.graph = Graph()
 
     def CC(self,sommet):
         cc = []
@@ -31,4 +33,16 @@ class Graphe:
 
 
     def isConnexe(self):
-        return len(self.graph.nodes()) == len(self.CC(self.graph,list(self.graph.nodes())[0]).nodes())
+        return len(self.graph.nodes()) == len(self.CC(list(self.graph.nodes())[0]).nodes())
+
+    def addNodes(self,nodes):
+        self.graph.add_nodes_from(nodes)
+
+    def addEdges(self,edges):
+        self.graph.add_edges_from(edges)
+
+B = Graphe()
+B.addNodes([1, 2, 3])
+B.addEdges([(2,3),(1,2)])
+
+print(B.isConnexe())
