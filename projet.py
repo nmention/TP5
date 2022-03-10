@@ -10,8 +10,24 @@ liste = []
 
 def readFile():
     file = open("data/graph","r")
-    print(file.read())
+    returnList = []
+    for x in file:
+        x = x.strip()
+        x = x.strip("\n")
+        liste = x.split("/")
+        vertices = [int(y) for y in liste[0] if y.isdigit()]
+        liste2 = liste[1].split("*")
+        print(liste2)
+        edges = []
+        for i in liste2:
+            thisTuple = [c for c in i if c.isdigit()]
+            thisTuple = tuple(thisTuple)
+            edges.append(thisTuple)
+        returnList.append(vertices)
+        returnList.append(edges)
     file.close()
+    print(returnList)
+    return returnList
 readFile()
 
 class Graphe:
@@ -37,12 +53,12 @@ class Graphe:
         while (True):
             firstGroup = nodesConnected[index]
             for j in range(len(nodesConnected)): ## pour chaque valeur de la liste principale
-                for z in range(len(nodesConnected[j])): ## pour chaque voisin dans appartenant au sommet j 
+                for z in range(len(nodesConnected[j])): ## pour chaque voisin dans appartenant au sommet j
                     if self.isLinked(nodesConnected[j],firstGroup): # si le voisin z appartenant a j est dans les voisins de i (donc que le sommet i est lie au sommet j)
                         if nodesConnected[j][z] not in total: # et si on ne l'a pas deja compte
-                            total.append(nodesConnected[j][z]) # alors on l'ajoute dans les sommets reliees     
-            i+=1 
-            if (i == len(list(nodesConnected[index]))): 
+                            total.append(nodesConnected[j][z]) # alors on l'ajoute dans les sommets reliees
+            i+=1
+            if (i == len(list(nodesConnected[index]))):
                 break
         print (total)
         return total
@@ -73,4 +89,4 @@ B = Graphe()
 B.addNodes([1, 2, 3,4,5])
 B.addEdges([(2,3),(1,4),(1,5)])
 
-print(B.isConnexe())
+
