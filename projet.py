@@ -6,29 +6,35 @@ import matplotlib.pyplot as plt
 from itertools import combinations
 import numpy as np
 
-liste = []
+def fusionArrayVertex(arrayDep, arrayComplement):
+    for i in range(len(arrayComplement)):
+        if (arrayComplement[i] != ","):
+            if arrayComplement[i] not in arrayDep:
+                arrayDep.append(arrayComplement[i])
+    
 
+def fusionArrayEdges(arrayDep, arrayComplement):
+    data = arrayComplement.split("*")
+
+    for line in data:
+        a = line.split(",")[0]
+        if (len(line.split(",")) >= 2):
+            b = line.split(",")[1]
+            tuples = (a,b)
+            arrayDep.append(tuples)
+  
 def readFile():
-    file = open("data/graph","r")
-    returnList = []
-    for x in file:
-        x = x.strip()
-        x = x.strip("\n")
-        liste = x.split("/")
-        vertices = [int(y) for y in liste[0] if y.isdigit()]
-        liste2 = liste[1].split("*")
-        print(liste2)
-        edges = []
-        for i in liste2:
-            thisTuple = [c for c in i if c.isdigit()]
-            thisTuple = tuple(thisTuple)
-            edges.append(thisTuple)
-        returnList.append(vertices)
-        returnList.append(edges)
-    file.close()
-    print(returnList)
-    return returnList
-readFile()
+    vertex = []
+    edge = []
+    file = open("data/graph.txt","r")
+    data = file.read().split("\n")   # on recupere toutes les lignes 1 par 1 dans un tableau
+    for line in data:
+        vertices = line.split("/")[0]
+        edges = line.split("/")[1]
+        fusionArrayEdges(edge,edges)
+        fusionArrayVertex(vertex,vertices)
+
+    return [vertex,edge]
 
 class Graphe:
     def __init__(self):
@@ -85,8 +91,14 @@ class Graphe:
     def addEdges(self,edges):
         self.graph.add_edges_from(edges)
 
+data = readFile();
+print(data[0])
+print(data)
 B = Graphe()
-B.addNodes([1, 2, 3,4,5])
-B.addEdges([(2,3),(1,4),(1,5)])
 
+
+B.addNodes(data[0])
+B.addEdges(data[1])
+
+print(B.isConnexe())
 
