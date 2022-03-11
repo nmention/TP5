@@ -1,4 +1,5 @@
 #Test
+import random
 from platform import node
 from re import T
 from networkx import *
@@ -11,7 +12,7 @@ def fusionArrayVertex(arrayDep, arrayComplement):
         if (arrayComplement[i] != ","):
             if arrayComplement[i] not in arrayDep:
                 arrayDep.append(arrayComplement[i])
-    
+
 
 def fusionArrayEdges(arrayDep, arrayComplement):
     data = arrayComplement.split("*")
@@ -22,7 +23,7 @@ def fusionArrayEdges(arrayDep, arrayComplement):
             b = line.split(",")[1]
             tuples = (a,b)
             arrayDep.append(tuples)
-  
+
 def readFile():
     vertex = []
     edge = []
@@ -94,6 +95,53 @@ class Graphe:
 data = readFile();
 print(data[0])
 print(data)
+
+class Edge:
+    def __init__(self,edge: tuple,weight: int):
+        self.edge = edge
+        self.weight = weight
+
+    def display(self):
+        print("Edge :",self.edge)
+        print("Weight : ",self.weight)
+
+class Vertice:
+    def __init__(self,name: str):
+        self.name = name
+
+    def display(self):
+        print("Name",self.name)
+
+class Graphe2:
+    def __init__(self,vertices: list,edges: list):
+        self.vertices = vertices
+        self.edges = edges
+
+    def display(self):
+        print("Vertices : ",self.vertices)
+        print("Edges", self.edges)
+
+    @staticmethod
+    def emptyGraph():
+        graphe = Graphe2([],[])
+        return graphe
+
+    def addVertice(self,vertex:Vertice):
+        self.vertices.append(vertex)
+
+    def removeVertice(self,vertex:Vertice):
+        self.vertices.remove(vertex)
+
+    @staticmethod
+    def randomGraphGenerator():
+        nbOfVertices = random.randint(1,9)
+        graphe = Graphe2.emptyGraph()
+        for i in range(nbOfVertices):
+            graphe.addVertice(Vertice(str(random.randint(0,10))))
+
+
+
+
 B = Graphe()
 
 
@@ -101,4 +149,33 @@ B.addNodes(data[0])
 B.addEdges(data[1])
 
 print(B.isConnexe())
+
+listeVertices = []
+vertice1 = Vertice("Paris")
+vertice2 = Vertice("Lyon")
+vertice3 = Vertice("Ajaccio")
+listeVertices.append(vertice1)
+listeVertices.append(vertice2)
+listeVertices.append(vertice3)
+
+listEdges = []
+edge1 = Edge((vertice1,vertice2),5)
+edge2 = Edge((vertice2,vertice3),2)
+edge3 = Edge((vertice3,vertice1),1)
+listEdges.append(edge1)
+listEdges.append(edge2)
+listEdges.append(edge3)
+
+graphe2 = Graphe2(listeVertices,listEdges)
+for i in graphe2.vertices:
+    i.display()
+for i in graphe2.edges:
+    i.display()
+graphe2.display()
+
+
+
+
+
+
 
