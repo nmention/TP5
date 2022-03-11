@@ -7,6 +7,11 @@ import matplotlib.pyplot as plt
 from itertools import combinations
 import numpy as np
 
+from classes.Edge import Edge
+from classes.Graphe2 import Graphe2
+from classes.Vertex import Vertex
+
+
 def fusionArrayVertex(arrayDep, arrayComplement):
     for i in range(len(arrayComplement)):
         if (arrayComplement[i] != ","):
@@ -96,48 +101,8 @@ data = readFile();
 print(data[0])
 print(data)
 
-class Edge:
-    def __init__(self,edge: tuple,weight: int):
-        self.edge = edge
-        self.weight = weight
 
-    def display(self):
-        print("Edge :",self.edge)
-        print("Weight : ",self.weight)
 
-class Vertice:
-    def __init__(self,name: str):
-        self.name = name
-
-    def display(self):
-        print("Name",self.name)
-
-class Graphe2:
-    def __init__(self,vertices: list,edges: list):
-        self.vertices = vertices
-        self.edges = edges
-
-    def display(self):
-        print("Vertices : ",self.vertices)
-        print("Edges", self.edges)
-
-    @staticmethod
-    def emptyGraph():
-        graphe = Graphe2([],[])
-        return graphe
-
-    def addVertice(self,vertex:Vertice):
-        self.vertices.append(vertex)
-
-    def removeVertice(self,vertex:Vertice):
-        self.vertices.remove(vertex)
-
-    @staticmethod
-    def randomGraphGenerator():
-        nbOfVertices = random.randint(1,9)
-        graphe = Graphe2.emptyGraph()
-        for i in range(nbOfVertices):
-            graphe.addVertice(Vertice(str(random.randint(0,10))))
 
 
 
@@ -151,9 +116,9 @@ B.addEdges(data[1])
 print(B.isConnexe())
 
 listeVertices = []
-vertice1 = Vertice("Paris")
-vertice2 = Vertice("Lyon")
-vertice3 = Vertice("Ajaccio")
+vertice1 = Vertex("Paris")
+vertice2 = Vertex("Lyon")
+vertice3 = Vertex("Ajaccio")
 listeVertices.append(vertice1)
 listeVertices.append(vertice2)
 listeVertices.append(vertice3)
