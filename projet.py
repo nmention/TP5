@@ -42,9 +42,16 @@ def readFile():
 
     return [vertex,edge]
 
+
 class Graphe:
     def __init__(self):
         self.graph = Graph()
+
+    def getAllNode(self):
+        return self.graph.nodes()
+    
+    def getAllEdges(self):
+        return self.graph.edges()
 
     def getAllNeighbors(self):
         """ Recupere tous les voisins de chaques sommet du graphe sous forme de tableau de tableau"""
@@ -97,15 +104,7 @@ class Graphe:
     def addEdges(self,edges):
         self.graph.add_edges_from(edges)
 
-data = readFile();
-print(data[0])
-print(data)
-
-
-
-
-
-
+data = readFile()
 
 B = Graphe()
 
@@ -113,6 +112,8 @@ B = Graphe()
 B.addNodes(data[0])
 B.addEdges(data[1])
 
+print(B.getAllNode())
+print(B.getAllEdges())
 print(B.isConnexe())
 
 listeVertices = []
@@ -132,12 +133,13 @@ listEdges.append(edge2)
 listEdges.append(edge3)
 
 graphe2 = Graphe2(listeVertices,listEdges)
+"""
 for i in graphe2.vertices:
     i.display()
 for i in graphe2.edges:
     i.display()
 graphe2.display()
-
+"""
 
 
 
