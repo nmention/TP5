@@ -1,3 +1,8 @@
+import random
+
+from classes.Vertex import Vertex
+
+
 class Graphe2:
     def __init__(self,vertices: list,edges: list):
         self.vertices = vertices
