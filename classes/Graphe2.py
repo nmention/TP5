@@ -1,5 +1,6 @@
 import random
 
+from classes.Edge import Edge
 from classes.Vertex import Vertex
 
 
@@ -10,22 +11,54 @@ class Graphe2:
 
     def display(self):
         print("Vertices : ",self.vertices)
+        for i in self.vertices:
+            i.display()
+
         print("Edges", self.edges)
+        for i in self.edges:
+            i.display()
+            i.getAllVertices()
+
 
     @staticmethod
     def emptyGraph():
         graphe = Graphe2([],[])
         return graphe
 
-    def addVertice(self, vertex:Vertex):
+    def addVertex(self, vertex:Vertex):
         self.vertices.append(vertex)
 
     def removeVertice(self, vertex:Vertex):
         self.vertices.remove(vertex)
 
+    def getAllVertices(self):
+        return self.vertices
+
+    def addEdge(self,edge:Edge):
+        self.edges.append(edge)
+
+    def removeEdge(self,edge:Edge):
+        self.edges.remove(edge)
+
     @staticmethod
     def randomGraphGenerator():
-        nbOfVertices = random.randint(1,9)
+        nbOfVertices = random.randint(1,9)  # pick random number for nb of Vertices
+        edgesNumber = (int)(nbOfVertices * (nbOfVertices - 1) / 2)  # max number of edges for non-oriented graph
+        edgesNumber = random.randint(1,edgesNumber)  # pick rand num btw 1 and max
         graphe = Graphe2.emptyGraph()
+        verticesList = []  # list of vertices exclusion (2 vertices can't have the same name)
+
+        # Adding the Vertices
         for i in range(nbOfVertices):
-            graphe.addVertice(Vertex(str(random.randint(0, 10))))
+            graphe.addVertex(Vertex(str(i)))
+
+        # Adding the Edges
+        for i in range(edgesNumber):
+            weight = (int)(random.random()*10)  # pick random number for weight
+            vertice1 = random.choice(graphe.getAllVertices())
+            vertice2 = random.choice(graphe.getAllVertices())
+            while vertice2 == vertice1 or (vertice1,vertice2) in graphe.edges or (vertice2,vertice1) in graphe.edges:
+                vertice2 = random.choice(graphe.getAllVertices())
+            graphe.addEdge(Edge((vertice1,vertice2),weight))
+        return graphe
+

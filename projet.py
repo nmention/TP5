@@ -133,6 +133,8 @@ listEdges.append(edge2)
 listEdges.append(edge3)
 
 graphe2 = Graphe2(listeVertices,listEdges)
+graphe3 = Graphe2.randomGraphGenerator()
+graphe3.display()
 """
 for i in graphe2.vertices:
     i.display()

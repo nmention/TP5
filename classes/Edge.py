@@ -6,3 +6,7 @@ class Edge:
     def display(self):
         print("Edge :",self.edge)
         print("Weight : ",self.weight)
+
+    def getAllVertices(self):
+        for i in self.edge:
+            i.display()

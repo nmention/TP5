@@ -4,3 +4,6 @@ class Vertex:
 
     def display(self):
         print("Name",self.name)
+
+    def getName(self):
+        return self.name
