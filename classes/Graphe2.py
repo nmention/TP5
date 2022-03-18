@@ -1,3 +1,4 @@
+import math
 import random
 from networkx import *
 from classes.Edge import Edge
@@ -57,11 +58,16 @@ class Graphe2:
 
     @staticmethod
     def randomGraphGenerator():
-        nbOfVertices = random.randint(1,9)  # pick random number for nb of Vertices
-        edgesNumber = (int)(nbOfVertices * (nbOfVertices - 1) / 2)  # max number of edges for non-oriented graph
+        nbOfVertices = 0
+        while nbOfVertices == 1 or nbOfVertices == 0:
+            nbOfVertices = random.randint(1, 9)  # pick random number for nb of Vertices
+        print(nbOfVertices)
+
+        edgesNumber = math.ceil(nbOfVertices * (nbOfVertices - 1) / 2)  # max number of edges for non-oriented graph
+        print(edgesNumber)
         edgesNumber = random.randint(1,edgesNumber)  # pick rand num btw 1 and max
         graphe = Graphe2.emptyGraph()
-        verticesList = []  # list of vertices exclusion (2 vertices can't have the same name)
+
 
         # Adding the Vertices
         for i in range(nbOfVertices):
@@ -72,9 +78,10 @@ class Graphe2:
             weight = (int)(random.random()*10)  # pick random number for weight
             vertice1 = random.choice(graphe.getAllVertices())
             vertice2 = random.choice(graphe.getAllVertices())
-            while vertice2 == vertice1 or (vertice1,vertice2) in graphe.edges or (vertice2,vertice1) in graphe.edges:
+            while vertice2 == vertice1 or (vertice1,vertice2) in [i.edge for i in graphe.edges] or (vertice2,vertice1) in [j.edge for j in graphe.edges]:
                 vertice2 = random.choice(graphe.getAllVertices())
             graphe.addEdge(Edge((vertice1,vertice2),weight))
+
         return graphe
 
     def getAllNeighbors(self):
