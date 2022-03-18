@@ -104,6 +104,7 @@ class Graphe:
     def addEdges(self,edges):
         self.graph.add_edges_from(edges)
 
+
 data = readFile()
 
 B = Graphe()
@@ -112,10 +113,11 @@ B = Graphe()
 B.addNodes(data[0])
 B.addEdges(data[1])
 
+"""
 print(B.getAllNode())
 print(B.getAllEdges())
 print(B.isConnexe())
-
+"""
 listeVertices = []
 vertice1 = Vertex("Paris")
 vertice2 = Vertex("Lyon")
@@ -132,16 +134,17 @@ listEdges.append(edge1)
 listEdges.append(edge2)
 listEdges.append(edge3)
 
+
 graphe2 = Graphe2(listeVertices,listEdges)
+"""
 graphe3 = Graphe2.randomGraphGenerator()
 graphe3.display()
 """
 for i in graphe2.vertices:
     i.display()
-for i in graphe2.edges:
-    i.display()
+for i in list(graphe2.edges):
+    print(graphe2.edges)
 graphe2.display()
-"""
 
 
 
