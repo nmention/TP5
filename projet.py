@@ -118,33 +118,23 @@ print(B.getAllNode())
 print(B.getAllEdges())
 print(B.isConnexe())
 """
-listeVertices = []
-vertice1 = Vertex("Paris")
-vertice2 = Vertex("Lyon")
-vertice3 = Vertex("Ajaccio")
-listeVertices.append(vertice1)
-listeVertices.append(vertice2)
-listeVertices.append(vertice3)
 
-listEdges = []
-edge1 = Edge((vertice1,vertice2),5)
-edge2 = Edge((vertice2,vertice3),2)
-edge3 = Edge((vertice3,vertice1),1)
-listEdges.append(edge1)
-listEdges.append(edge2)
-listEdges.append(edge3)
+vertices = ["Paris","Lyon","Ajaccio"]
 
+listEdges = [ [ (1,2),5], [(2,3),2 ], [(3,1),1] ]
 
-graphe2 = Graphe2(listeVertices,listEdges)
+graphe2 = Graphe2(vertices,listEdges)
+print(graphe2.getAllNeighbors())
 """
 graphe3 = Graphe2.randomGraphGenerator()
 graphe3.display()
-"""
+
 for i in graphe2.vertices:
     i.display()
 for i in list(graphe2.edges):
     print(graphe2.edges)
 graphe2.display()
+"""
 
 
 

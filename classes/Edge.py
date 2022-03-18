@@ -12,3 +12,6 @@ class Edge:
     def getAllVertices(self):
         for i in self.edge:
             i.display()
+
+    def getVertices(self):
+        return [self.edge[0].name, self.edge[1].name]

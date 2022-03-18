@@ -1,13 +1,28 @@
 import random
-
+from networkx import *
 from classes.Edge import Edge
 from classes.Vertex import Vertex
 
 
 class Graphe2:
     def __init__(self,vertices: list,edges: list):
-        self.vertices = vertices
-        self.edges = edges
+        self.vertices = []
+        self.edges = []
+
+        edgesGraphes = []
+        verticesGraphes = [] 
+
+        for i in range(len(vertices)):
+           self.vertices.append(Vertex(vertices[i]))
+           verticesGraphes.append(vertices[i])
+
+        for i in range(len(edges)):
+            self.edges.append(Edge(edges[i][0],edges[i][1]))
+            edgesGraphes.append(edges[i][0])
+
+        self.graph = Graph()
+        self.graph.add_nodes_from(verticesGraphes)
+        self.graph.add_edges_from(edgesGraphes)
 
     def display(self):
         print("Vertices : ",self.vertices)
@@ -61,4 +76,14 @@ class Graphe2:
                 vertice2 = random.choice(graphe.getAllVertices())
             graphe.addEdge(Edge((vertice1,vertice2),weight))
         return graphe
+
+    def getAllNeighbors(self):
+        """ Recupere tous les voisins de chaques sommet du graphe sous forme de tableau de tableau"""
+        vertex = self.graph.nodes
+        nodesConnected = []
+        for i in range(len(vertex)): # pour chaque noeud dans le graphe
+            nodesConnected.append(list(self.graph.neighbors(list(vertex)[i]))) # on recupere les voisins de CHAQUE noeuds
+            nodesConnected[i].append(list(vertex)[i])
+
+        return nodesConnected
 
