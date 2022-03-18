@@ -18,10 +18,15 @@ class Graphe2:
            verticesGraphes.append(vertices[i])
 
         for i in range(len(edges)):
-            self.edges.append(Edge(edges[i][0],edges[i][1]))
-            edgesGraphes.append(edges[i][0])
+            print(edges[i][0])
+            nbVertex1,nbVertex2 = edges[i][0]
+            vertex1 = self.vertices[nbVertex1-1]
+            vertex2 = self.vertices[nbVertex2-1]
+            self.edges.append(Edge((vertex1,vertex2),edges[i][1]))
+            edgesGraphes.append((vertex1.name,vertex2.name))
 
         self.graph = Graph()
+        print(edgesGraphes)
         self.graph.add_nodes_from(verticesGraphes)
         self.graph.add_edges_from(edgesGraphes)
 
@@ -87,6 +92,7 @@ class Graphe2:
     def getAllNeighbors(self):
         """ Recupere tous les voisins de chaques sommet du graphe sous forme de tableau de tableau"""
         vertex = self.graph.nodes
+        #print( vertex)
         nodesConnected = []
         for i in range(len(vertex)): # pour chaque noeud dans le graphe
             nodesConnected.append(list(self.graph.neighbors(list(vertex)[i]))) # on recupere les voisins de CHAQUE noeuds
