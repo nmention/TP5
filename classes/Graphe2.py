@@ -18,7 +18,6 @@ class Graphe2:
            verticesGraphes.append(vertices[i])
 
         for i in range(len(edges)):
-            print(edges[i][0])
             nbVertex1,nbVertex2 = edges[i][0]
             vertex1 = self.vertices[nbVertex1-1]
             vertex2 = self.vertices[nbVertex2-1]
@@ -26,7 +25,6 @@ class Graphe2:
             edgesGraphes.append((vertex1.name,vertex2.name))
 
         self.graph = Graph()
-        print(edgesGraphes)
         self.graph.add_nodes_from(verticesGraphes)
         self.graph.add_edges_from(edgesGraphes)
 
