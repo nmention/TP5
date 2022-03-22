@@ -1,6 +1,8 @@
 import math
 import random
+from tkinter import N
 from networkx import *
+from random import choice
 from classes.Edge import Edge
 from classes.Vertex import Vertex
 
@@ -13,31 +15,33 @@ class Graphe2:
         edgesGraphes = []
         verticesGraphes = [] 
 
-        for i in range(len(vertices)):
-           self.vertices.append(Vertex(vertices[i]))
-           verticesGraphes.append(vertices[i])
-
-        for i in range(len(edges)):
-            nbVertex1,nbVertex2 = edges[i][0]
-            vertex1 = self.vertices[nbVertex1-1]
-            vertex2 = self.vertices[nbVertex2-1]
-            self.edges.append(Edge((vertex1,vertex2),edges[i][1]))
-            edgesGraphes.append((vertex1.name,vertex2.name))
+        if vertices != []:
+            for i in range(len(vertices)):
+                self.vertices.append(Vertex(vertices[i]))
+                verticesGraphes.append(vertices[i])
+        if edges != []:
+            for i in range(len(edges)):
+                nbVertex1,nbVertex2 = edges[i][0]
+                vertex1 = self.vertices[nbVertex1-1]
+                vertex2 = self.vertices[nbVertex2-1]
+                self.edges.append(Edge((vertex1,vertex2),edges[i][1]))
+                edgesGraphes.append((vertex1.name,vertex2.name))
 
         self.graph = Graph()
         self.graph.add_nodes_from(verticesGraphes)
         self.graph.add_edges_from(edgesGraphes)
 
     def display(self):
-        print("Vertices : ",self.vertices)
+        vertices = []
+        edges = []
         for i in self.vertices:
-            i.display()
+            vertices.append([i.name])
 
-        print("Edges", self.edges)
         for i in self.edges:
-            i.display()
-            i.getAllVertices()
+            edges.append((i.edge[0].name,i.edge[1].name))
 
+        print("Sommets :" ,vertices)
+        print("Aretes : " ,edges)
 
     @staticmethod
     def emptyGraph():
@@ -59,33 +63,13 @@ class Graphe2:
     def removeEdge(self,edge:Edge):
         self.edges.remove(edge)
 
-    @staticmethod
-    def randomGraphGenerator():
-        nbOfVertices = 0
-        while nbOfVertices == 1 or nbOfVertices == 0:
-            nbOfVertices = random.randint(1, 9)  # pick random number for nb of Vertices
-        print(nbOfVertices)
-
-        edgesNumber = math.ceil(nbOfVertices * (nbOfVertices - 1) / 2)  # max number of edges for non-oriented graph
-        print(edgesNumber)
-        edgesNumber = random.randint(1,edgesNumber)  # pick rand num btw 1 and max
+ 
+    def randomGraphGenerator(self):
         graphe = Graphe2.emptyGraph()
+        graphe = self.remplirSommetsAleatoire(graphe)
+        graphe = self.remplirAretesAleatoire(graphe)
+        return graphe.display()
 
-
-        # Adding the Vertices
-        for i in range(nbOfVertices):
-            graphe.addVertex(Vertex(str(i)))
-
-        # Adding the Edges
-        for i in range(edgesNumber):
-            weight = (int)(random.random()*10)  # pick random number for weight
-            vertice1 = random.choice(graphe.getAllVertices())
-            vertice2 = random.choice(graphe.getAllVertices())
-            while vertice2 == vertice1 or (vertice1,vertice2) in [i.edge for i in graphe.edges] or (vertice2,vertice1) in [j.edge for j in graphe.edges]:
-                vertice2 = random.choice(graphe.getAllVertices())
-            graphe.addEdge(Edge((vertice1,vertice2),weight))
-
-        return graphe
 
     def getAllNeighbors(self):
         """ Recupere tous les voisins de chaques sommet du graphe sous forme de tableau de tableau"""
@@ -98,3 +82,32 @@ class Graphe2:
 
         return nodesConnected
 
+
+    def remplirSommetsAleatoire(self,graphe):
+        nbOfVertices = random.randint(2, 9)  # pick random number for nb of Vertices
+        for i in range(nbOfVertices):
+            i+=1 ## simplement pour afficher un chiffre different de 0 , pas important
+            graphe.addVertex(Vertex(str(i))) # on creer i noeuds ( valeurs croissantes : 1 à i)
+        
+        return graphe
+
+    def remplirAretesAleatoire(self,graphe):
+        vertices = graphe.getAllVertices()
+        tailleGraphe = len(vertices)
+        nbMaxArete = math.ceil(tailleGraphe * (tailleGraphe - 1) / 2)
+        for i in range(random.randint(0, nbMaxArete)):
+            weight = random.randint(0,100) # on genere le poid aleatoire de  1 a 100
+            ## partie de la liaison des sommets :
+            random1 = random.randint(0,tailleGraphe-1) 
+            random2 = choice([i for i in range(tailleGraphe) if i not in [random1]]) # on prend un random en EXCLUANT le 1er pou rne pas avoir 2 fois le meme sommet
+            sommet1 = vertices[random1]
+            sommet2 = vertices[random2]
+            if ( self.isInEdges(sommet1,sommet2,graphe) == False): # si le tuple n'est pas deja dans les edges du graphes 
+                graphe.addEdge(Edge([sommet1,sommet2],weight))
+        return graphe
+
+    def isInEdges(self,sommet1,sommet2,graphe):
+        for i in graphe.edges:
+            if (sommet1.name,sommet2.name) == (i.edge[0].name,i.edge[1].name): return True
+            if (sommet1.name,sommet2.name) == (i.edge[1].name,i.edge[0].name): return True
+        return False

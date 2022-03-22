@@ -124,7 +124,9 @@ vertices = ["Paris","Lyon","Ajaccio"]
 listEdges = [ [ (1,2),5], [(2,3),2 ], [(3,1),1] ]
 
 graphe2 = Graphe2(vertices,listEdges)
-print(graphe2.getAllNeighbors())
+
+graphe3 = Graphe2([],[])
+print(graphe2.randomGraphGenerator())
 """
 graphe3 = Graphe2.randomGraphGenerator()
 graphe3.display()
