@@ -135,6 +135,9 @@ graphe3 = Graphe2([],[])
 graphe3 = graphe3.randomGraphGenerator()
 graphe3.display()
 graphe3.disjkstra()
+graphe3.printMarquage()
+
+
 
 
 """

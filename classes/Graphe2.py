@@ -35,14 +35,17 @@ class Graphe2:
     def display(self):
         vertices = []
         edges = []
+        weight = []
         for i in self.vertices:
             vertices.append([i.name])
 
         for i in self.edges:
             edges.append((i.edge[0].name,i.edge[1].name))
+            weight.append(i.weight)
 
         print("Sommets :" ,vertices)
         print("Aretes : " ,edges)
+        print("Weight : ",weight)
 
     @staticmethod
     def emptyGraph():
@@ -133,6 +136,14 @@ class Graphe2:
             if vertex == i.edge[1]:
                 vertices.append(i.edge[0])
         return vertices
+
+    def printMarquage(self):
+        marquages = []
+        for i in self.vertices:
+            marquages.append(i.marquage)
+        print("Marquages : ",marquages)
+
+
 
 
 
