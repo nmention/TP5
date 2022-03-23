@@ -216,6 +216,7 @@ class Graphe2:
         pointDeDepart = sommets[0]
         cheminFinal = []
         cheminFinal.append(pointDeDepart.name)
+        poidTotal = 0
         while True:  
             poidMini = 0
             voisins = pointDeDepart.matrice
@@ -227,9 +228,9 @@ class Graphe2:
                     elif poidMini> voisins[i][1]:
                         poidMini = voisins[i][1]
                         tupleResult = (voisins[i])
-
+            poidTotal+= poidMini
             cheminFinal.append(tupleResult[0].name)
             marque.append(tupleResult[0].name)
             pointDeDepart = tupleResult[0]
             if len(marque) == len(sommets): 
-                return cheminFinal
+                return [cheminFinal,poidTotal]
