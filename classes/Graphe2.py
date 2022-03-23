@@ -193,7 +193,22 @@ class Graphe2:
 
             
 
-            
-            
+    def disjkstra2(self):
+        sommets = self.getAllVertices()
+       
+        matriceTotale =[]
+        for j in range(len(sommets)):
+            pointDeDepart = sommets[j]
+            matrice2d =[]
+            voisins = self.getAllEdgesByVertex(pointDeDepart)
+            for i in range(len(voisins)):
+                if (pointDeDepart.name != voisins[i].edge[0].name):
+                    voisin = voisins[i].edge[0]
+                else: 
+                    voisin = voisins[i].edge[1]
+                matrice2d.append((voisin.name,voisins[i].weight))
+            pointDeDepart.matrice = matrice2d
+            matriceTotale.append(matrice2d)
+       
 
 
