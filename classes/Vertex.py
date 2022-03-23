@@ -3,6 +3,7 @@ class Vertex:
         self.name = name
         self.neighbors = []
         self.marquage = 110
+        self.estPris = False
 
     def display(self):
         print("Name",self.name)

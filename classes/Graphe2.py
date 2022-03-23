@@ -1,3 +1,4 @@
+import copy
 import math
 import random
 from tkinter import N
@@ -147,14 +148,40 @@ class Graphe2:
                     verticesNeighbors[j].marquage = currentNeighbors[j].weight
             exclusionList.append(currentVertice)
 
+    def noeudLePlusProche(self,vertex):
+        neighbors = self.getAllEdgesByVertex(vertex)
+        listPoidsVoisin = [i.weight for i in neighbors]
+
+        poidVoisinLePlusProche = min(listPoidsVoisin)
+        indexVoisinLePlusProche = listPoidsVoisin.index(poidVoisinLePlusProche)  #si il y a deux meme poid d'arrete, prend l'index le plus petit de la liste (0>2)
+
+        sommet1 = neighbors[indexVoisinLePlusProche].edge[0]
+        sommet2 = neighbors[indexVoisinLePlusProche].edge[1]
+        if (vertex.name == sommet1.name): noeudLePlusProche = sommet2
+        else : noeudLePlusProche = sommet1
+        return ([noeudLePlusProche, poidVoisinLePlusProche]) # on renvoie le sommet de l'arete different du sommet donne (car l'un de deux est forcement le sommet donnee)l'arete du voisin le plus proche
 
 
+    def algoGlouton(self):
+        noeudsReference = self.getAllVertices()
+        poidsTotal = 0
+        noeuds = copy.copy(noeudsReference) # en python les variables sont des liaisons vers les pointeurs, donc un pop d'une liste d'une variable supprime aussi dans le vrai objet
+        chemins = []
+        noeudDep = noeuds[0]
+        areteUtilisable = copy.copy(self.edges)
+        for i in range(len(noeudsReference)):
+            voisinPlusProche = self.noeudLePlusProche(noeudDep)
+        
+            noeuds.remove(voisinPlusProche[0])
+            chemins.append(voisinPlusProche[0].name)
+            poidsTotal+=voisinPlusProche[1]
+            noeudDep = voisinPlusProche[0]
 
+        return [chemins,poidsTotal]
 
+            
 
-
-
-
-
+            
+            
 
 
