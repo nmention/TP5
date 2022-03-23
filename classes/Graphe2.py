@@ -197,6 +197,7 @@ class Graphe2:
         sommets = self.getAllVertices()
        
         matriceTotale =[]
+        # assignation des voisins et poids
         for j in range(len(sommets)):
             pointDeDepart = sommets[j]
             matrice2d =[]
@@ -206,9 +207,29 @@ class Graphe2:
                     voisin = voisins[i].edge[0]
                 else: 
                     voisin = voisins[i].edge[1]
-                matrice2d.append((voisin.name,voisins[i].weight))
+                matrice2d.append((voisin,voisins[i].weight))
             pointDeDepart.matrice = matrice2d
             matriceTotale.append(matrice2d)
        
+        marque =[]
+        marque.append(sommets[0])
+        pointDeDepart = sommets[0]
+        cheminFinal = []
+        cheminFinal.append(pointDeDepart.name)
+        while True:  
+            poidMini = 0
+            voisins = pointDeDepart.matrice
+            for i in range(len(voisins)): #tant qu'il y a des voisins, pour tous les voisins
+                if (voisins[i][0].name not in marque):
+                    if poidMini == 0 : #on recupere celui avec le poid minimum
+                        poidMini = voisins[i][1]
+                        tupleResult = (voisins[i])
+                    elif poidMini> voisins[i][1]:
+                        poidMini = voisins[i][1]
+                        tupleResult = (voisins[i])
 
-
+            cheminFinal.append(tupleResult[0].name)
+            marque.append(tupleResult[0].name)
+            pointDeDepart = tupleResult[0]
+            if len(marque) == len(sommets): 
+                return cheminFinal
