@@ -63,12 +63,13 @@ class Graphe2:
     def removeEdge(self,edge:Edge):
         self.edges.remove(edge)
 
- 
+
     def randomGraphGenerator(self):
         graphe = Graphe2.emptyGraph()
         graphe = self.remplirSommetsAleatoire(graphe)
         graphe = self.remplirAretesAleatoire(graphe)
-        return graphe.display()
+        graphe.display()
+        return graphe
 
 
     def getAllNeighbors(self):
@@ -83,12 +84,13 @@ class Graphe2:
         return nodesConnected
 
 
+
     def remplirSommetsAleatoire(self,graphe):
         nbOfVertices = random.randint(2, 9)  # pick random number for nb of Vertices
         for i in range(nbOfVertices):
             i+=1 ## simplement pour afficher un chiffre different de 0 , pas important
-            graphe.addVertex(Vertex(str(i))) # on creer i noeuds ( valeurs croissantes : 1 à i)
-        
+            graphe.addVertex(Vertex(str(i))) # on creer i noeuds ( valeurs croissantes : 1 ï¿½ i)
+
         return graphe
 
     def remplirAretesAleatoire(self,graphe):
@@ -98,11 +100,11 @@ class Graphe2:
         for i in range(random.randint(0, nbMaxArete)):
             weight = random.randint(0,100) # on genere le poid aleatoire de  1 a 100
             ## partie de la liaison des sommets :
-            random1 = random.randint(0,tailleGraphe-1) 
+            random1 = random.randint(0,tailleGraphe-1)
             random2 = choice([i for i in range(tailleGraphe) if i not in [random1]]) # on prend un random en EXCLUANT le 1er pou rne pas avoir 2 fois le meme sommet
             sommet1 = vertices[random1]
             sommet2 = vertices[random2]
-            if ( self.isInEdges(sommet1,sommet2,graphe) == False): # si le tuple n'est pas deja dans les edges du graphes 
+            if ( self.isInEdges(sommet1,sommet2,graphe) == False): # si le tuple n'est pas deja dans les edges du graphes
                 graphe.addEdge(Edge([sommet1,sommet2],weight))
         return graphe
 
@@ -111,3 +113,48 @@ class Graphe2:
             if (sommet1.name,sommet2.name) == (i.edge[0].name,i.edge[1].name): return True
             if (sommet1.name,sommet2.name) == (i.edge[1].name,i.edge[0].name): return True
         return False
+
+    def nbVertices(self):
+        return len(self.vertices)
+
+    def getAllEdgesByVertex(self,vertex):
+        routes = []
+        for i in self.edges:
+            if vertex == i.edge[0] or vertex == i.edge[1]:
+                routes.append(i.edge)
+        return routes
+
+    def getAllNeighborsVertices(self,vertex):
+        vertices = []
+        for i in self.getAllEdgesByVertex(vertex):
+            if vertex == i.edge[0]:
+                vertices.append(i.edge[1])
+            if vertex == i.edge[1]:
+                vertices.append(i.edge[0])
+        return vertices
+
+
+
+
+    def disjkstra(self):
+        exclusionList = []
+        for i in range(self.nbVertices()):
+            currentVertice = self.vertices[i]
+            currentNeighbors = self.getAllEdgesByVertex(currentVertice)
+            verticesNeighbors = self.getAllNeighborsVertices(currentVertice)
+            for j,k in currentNeighbors,verticesNeighbors:
+                if j.weight < k.marquage and k not in exclusionList:
+                    k.marquage = j.weight
+            exclusionList.append(currentVertice)
+
+
+
+
+
+
+
+
+
+
+
+
