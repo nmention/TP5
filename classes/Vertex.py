@@ -4,6 +4,7 @@ class Vertex:
         self.neighbors = []
         self.marquage = 110
         self.estPris = False
+        self.historique = [0]
 
     def display(self):
         print("Name",self.name)

@@ -155,6 +155,7 @@ class Graphe2:
             currentNeighbors = self.getAllEdgesByVertex(currentVertice)
             verticesNeighbors = self.getAllNeighborsVertices(currentVertice)
             for j in range(len(currentNeighbors)):
+                verticesNeighbors[j].marquage += currentVertice.marquage
                 if currentNeighbors[j].weight < verticesNeighbors[j].marquage and verticesNeighbors[j] not in exclusionList:
                     verticesNeighbors[j].marquage = currentNeighbors[j].weight
             exclusionList.append(currentVertice)

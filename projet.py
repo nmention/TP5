@@ -134,8 +134,12 @@ print(graphe2.randomGraphGenerator())
 graphe3 = Graphe2([],[])
 graphe3 = graphe3.randomGraphGenerator()
 graphe3.display()
+graphe3.printMarquage()
 graphe3.disjkstra()
 graphe3.printMarquage()
+
+
+grapheComplet = Graphe2(["1","2","3","4"],[()])
 
 
 

@@ -8,7 +8,12 @@ graphe = Graphe2(vertices, listEdges)
 
 print(graphe.noeudLePlusProche(graphe.getAllVertices()[0])[0].name)
 
+
+
 #algoGlouton = graphe.algoGlouton()
 
 #print(algoGlouton[0],algoGlouton[1])
 graphe.display()
+graphe.printMarquage()
+graphe.disjkstra()
+graphe.printMarquage()
