@@ -121,16 +121,16 @@ class Graphe2:
         routes = []
         for i in self.edges:
             if vertex == i.edge[0] or vertex == i.edge[1]:
-                routes.append(i.edge)
+                routes.append(i)
         return routes
 
     def getAllNeighborsVertices(self,vertex):
         vertices = []
         for i in self.getAllEdgesByVertex(vertex):
-            if vertex == i[0]:
-                vertices.append(i[1])
-            if vertex == i[1]:
-                vertices.append(i[0])
+            if vertex == i.edge[0]:
+                vertices.append(i.edge[1])
+            if vertex == i.edge[1]:
+                vertices.append(i.edge[0])
         return vertices
 
 
@@ -142,9 +142,9 @@ class Graphe2:
             currentVertice = self.vertices[i]
             currentNeighbors = self.getAllEdgesByVertex(currentVertice)
             verticesNeighbors = self.getAllNeighborsVertices(currentVertice)
-            for j,k in currentNeighbors,verticesNeighbors:
-                if j.weight < k.marquage and k not in exclusionList:
-                    k.marquage = j.weight
+            for j in range(len(currentNeighbors)):
+                if currentNeighbors[j].weight < verticesNeighbors[j].marquage and verticesNeighbors[j] not in exclusionList:
+                    verticesNeighbors[j].marquage = currentNeighbors[j].weight
             exclusionList.append(currentVertice)
 
 
