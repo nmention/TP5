@@ -134,7 +134,8 @@ print(graphe2.randomGraphGenerator())
 graphe3 = Graphe2([],[])
 graphe3 = graphe3.randomGraphGenerator()
 graphe3.display()
-graphe3.getNeighbors(graphe3.vertices[0])
+graphe3.disjkstra()
+
 
 """
 for i in graphe2.vertices:

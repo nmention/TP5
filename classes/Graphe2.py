@@ -127,10 +127,10 @@ class Graphe2:
     def getAllNeighborsVertices(self,vertex):
         vertices = []
         for i in self.getAllEdgesByVertex(vertex):
-            if vertex == i.edge[0]:
-                vertices.append(i.edge[1])
-            if vertex == i.edge[1]:
-                vertices.append(i.edge[0])
+            if vertex == i[0]:
+                vertices.append(i[1])
+            if vertex == i[1]:
+                vertices.append(i[0])
         return vertices
 
 
