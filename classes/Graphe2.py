@@ -267,3 +267,16 @@ class Graphe2:
                 return True
         return False
 
+    def matrice2d(self):
+        verticesGraphe = self.getAllVertices()
+        if (len(verticesGraphe[0].matrice) == 0):
+            return [] 
+        arrayTotal =[]
+        for i in range(len(verticesGraphe)):
+            ligne = []
+            for j in range(len(verticesGraphe[i].matrice)):
+                vertex,weight = verticesGraphe[i].matrice[j][0].name,verticesGraphe[i].matrice[j][1]
+                ligne.append((vertex,weight))
+            arrayTotal.append(ligne)
+
+        return arrayTotal
