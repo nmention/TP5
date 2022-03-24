@@ -144,10 +144,6 @@ class Graphe2:
         print("Marquages : ",marquages)
 
 
-
-
-
-
     def disjkstra(self):
         exclusionList = []
         for i in range(self.nbVertices()):
@@ -236,3 +232,38 @@ class Graphe2:
             pointDeDepart = tupleResult[0]
             if len(marque) == len(sommets): 
                 return [cheminFinal,poidTotal,distances]
+
+        
+    def isConnexe(self):
+        nodesConnected = self.getAllNeighbors() # on recupere tous les noeuds du graphe
+        total = self.getAllNodeConnectedByIndex(nodesConnected,1) # on recupere tous les noeuds connecte au noeud 1
+        if len(self.graph.nodes()) == len(total) :
+            return True
+        return False
+
+    
+    def getAllNodeConnectedByIndex(self, nodesConnected,index):
+        """ Recupere tous les voisins directe et lointain du """
+        total = []
+        i= 0
+        j= 1
+        while (True):
+            firstGroup = nodesConnected[index]
+            for j in range(len(nodesConnected)): ## pour chaque valeur de la liste principale
+                for z in range(len(nodesConnected[j])): ## pour chaque voisin dans appartenant au sommet j
+                    if self.isLinked(nodesConnected[j],firstGroup): # si le voisin z appartenant a j est dans les voisins de i (donc que le sommet i est lie au sommet j)
+                        if nodesConnected[j][z] not in total: # et si on ne l'a pas deja compte
+                            total.append(nodesConnected[j][z]) # alors on l'ajoute dans les sommets reliees
+            i+=1
+            if (i == len(list(nodesConnected[index]))):
+                break
+        print (total)
+        return total
+
+    def isLinked(self,group1, group2):
+        """Permet de regarder si le sommetX est connexe avec le sommetY"""
+        for i in range(len(group1)):
+            if group1[i] in group2:
+                return True
+        return False
+
