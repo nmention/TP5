@@ -273,10 +273,11 @@ class Graphe:
 
     def fusionArrayEdges(self,arrayDep, arrayComplement,poid):
         data = arrayComplement.split("*")
-
         for line in data:
-            a = line.split(",")[0]
+            a = line.split("-")[0]
+            c = a.split(",")[0]
+            print(a)
             if (len(line.split(",")) >= 2):
                 b = line.split(",")[1]
-                tuples = (a,b)
-                arrayDep.append([tuples,poid])
+                tuples = (c,b)
+                arrayDep.append([tuples])
