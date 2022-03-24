@@ -37,16 +37,6 @@ measureTime(graphe)
 
 print(graphe.disjkstra2())
 
-
-arrayTotal =[]
-verticesGraphe = graphe.getAllVertices()
-for i in range(len(verticesGraphe)):
-    ligne = []
-    for j in range(len(verticesGraphe[i].matrice)):
-        vertex,weight = verticesGraphe[i].matrice[j][0].name,verticesGraphe[i].matrice[j][1]
-        ligne.append((vertex,weight))
-    arrayTotal.append(ligne)
-
-print(arrayTotal)
+print(graphe.matrice2d())
 
 #graphe.printMarquage()
