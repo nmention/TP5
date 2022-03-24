@@ -1,14 +1,15 @@
 # #Test
-# import random
-# from platform import node
-# from re import T
-# from networkx import *
-# import matplotlib.pyplot as plt
-# from itertools import combinations
-# import numpy as np
-#
-# from classes.Edge import Edge
-# from classes.Graphe2 import Graphe2
+import random
+import time
+from platform import node
+from re import T
+from networkx import *
+import matplotlib.pyplot as plt
+from itertools import combinations
+import numpy as np
+
+from classes.Edge import Edge
+from classes.Graphe2 import Graphe2
 # from classes.Vertex import Vertex
 #
 #
@@ -151,6 +152,11 @@ for i in list(graphe2.edges):
     print(graphe2.edges)
 graphe2.display()
 """
+
+
+
+
+
 
 
 
