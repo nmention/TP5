@@ -60,4 +60,9 @@ measureTime(dijsktra)
 measureTime(dijsktra2)
 measureTime(dijsktra3)
 
+graphe4 = Graphe([],[])
+print(graphe4.readFile())
+
+
+
 #graphe.printMarquage()
