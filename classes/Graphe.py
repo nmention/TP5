@@ -21,8 +21,8 @@ class Graphe:
         if edges != []:
             for i in range(len(edges)):
                 nbVertex1, nbVertex2 = edges[i][0]
-                vertex1 = self.vertices[nbVertex1 - 1]
-                vertex2 = self.vertices[nbVertex2 - 1]
+                vertex1 = self.vertices[int(nbVertex1) - 1]
+                vertex2 = self.vertices[int(nbVertex2) - 1]
                 self.edges.append(Edge((vertex1, vertex2), edges[i][1]))
                 edgesGraphes.append((vertex1.name, vertex2.name))
 
@@ -249,35 +249,3 @@ class Graphe:
             self.vertices.append(Vertex(sommets[i]))
         for i in range(len(self.vertices) - 1):
             self.edges.append(Edge((self.vertices[i], self.vertices[i + 1]), random.randint(1, 100)))
-
-    def readFile(self):
-        vertex = []
-        edge = []
-        file = open("data/graph.txt","r")
-        data = file.read().split("\n")   # on recupere toutes les lignes 1 par 1 dans un tableau
-        for line in data:
-            vertices = line.split("/")[0]
-            edges = line.split("/")[1]
-            poid = line.split("-")[0]
-            self.fusionArrayEdges(edge,edges,poid)
-            self.fusionArrayVertex(vertex,vertices)
-
-        return [vertex,edge]
-
-    def fusionArrayVertex(self,arrayDep, arrayComplement):
-        for i in range(len(arrayComplement)):
-            if (arrayComplement[i] != ","):
-                if arrayComplement[i] not in arrayDep:
-                    arrayDep.append(arrayComplement[i])
-
-
-    def fusionArrayEdges(self,arrayDep, arrayComplement,poid):
-        data = arrayComplement.split("*")
-        for line in data:
-            a = line.split("-")[0]
-            c = a.split(",")[0]
-            print(a)
-            if (len(line.split(",")) >= 2):
-                b = line.split(",")[1]
-                tuples = (c,b)
-                arrayDep.append([tuples])
