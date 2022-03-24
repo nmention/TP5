@@ -190,24 +190,23 @@ class Graphe2:
             
 
     def disjkstra2(self):
-        sommets = self.getAllVertices()
-       
+        sommets = self.getAllVertices() # récupération de tous les sommets du graphe
         matriceTotale =[]
         # assignation des voisins et poids
-        for j in range(len(sommets)):
-            pointDeDepart = sommets[j]
+        for j in range(len(sommets)): #itération sur tous les sommets
+            pointDeDepart = sommets[j] # on récupère le sommet courant
             matrice2d =[]
-            voisins = self.getAllEdgesByVertex(pointDeDepart)
-            for i in range(len(voisins)):
-                if (pointDeDepart.name != voisins[i].edge[0].name):
+            voisins = self.getAllEdgesByVertex(pointDeDepart) # on récupère toutes les arrêtes reliant le sommet
+            for i in range(len(voisins)): # on itère sur les voisins
+                if (pointDeDepart.name != voisins[i].edge[0].name): # on recupère le sommmet voisin
                     voisin = voisins[i].edge[0]
                 else: 
                     voisin = voisins[i].edge[1]
-                matrice2d.append((voisin,voisins[i].weight))
-            pointDeDepart.matrice = matrice2d
-            matriceTotale.append(matrice2d)
+                matrice2d.append((voisin,voisins[i].weight)) #on ajoute à la matrice le voisins et et le poids de son arrête
+            pointDeDepart.matrice = matrice2d # on associe la matrice au sommet courant
+            matriceTotale.append(matrice2d) # on rajoute la matrice courante avec la matrice distance
        
-        marque =[]
+        marque =[] # inutile
         marque.append(sommets[0])
         pointDeDepart = sommets[0]
         cheminFinal = []
@@ -223,10 +222,10 @@ class Graphe2:
                         poidMini = voisins[i][1]
                         tupleResult = (voisins[i])
                     elif poidMini> voisins[i][1]:
-                        poidMini = voisins[i][1]
+                        poidMini = voisins[i][1] #si jamais le plus court chemin est inférieur à une autre connexion: on lui assigne le nouveau
                         tupleResult = (voisins[i])
-            distances.append((pointDeDepart.name,poidMini))
-            poidTotal+= poidMini
+            distances.append((pointDeDepart.name,poidMini)) #
+            poidTotal+= poidMini # on ajoute le poids précédent d'un chemin
             cheminFinal.append(tupleResult[0].name)
             marque.append(tupleResult[0].name)
             pointDeDepart = tupleResult[0]
