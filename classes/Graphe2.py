@@ -236,7 +236,7 @@ class Graphe2:
     def isConnexe(self):
         nodesConnected = self.getAllNeighbors() # on recupere tous les noeuds du graphe
         total = self.getAllNodeConnectedByIndex(nodesConnected,1) # on recupere tous les noeuds connecte au noeud 1
-        if len(self.graph.nodes()) == len(total) :
+        if len(self.getAllVertices()) == len(total) :
             return True
         return False
 
