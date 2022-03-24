@@ -21,10 +21,10 @@ graphe2 = Graphe2(vertices, listEdges2)
 print(graphe.isConnexe())
 print(graphe2.isConnexe())
 
-def measureTime(graphe):
+def measureTime(fct):
     start_time = time.time()
     print(start_time)
-    graphe.disjkstra2()
+    fct()
     end_time = time.time()
     print(end_time)
     exec_time = current_nano_time(end_time - start_time)
@@ -33,7 +33,10 @@ def measureTime(graphe):
 def current_nano_time(nb):
     return nb * 1000000000
 
-measureTime(graphe)
+dijsktra = graphe.disjkstra2
+
+
+measureTime(dijsktra)
 
 print(graphe.disjkstra2())
 
