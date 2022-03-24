@@ -8,7 +8,7 @@ from classes.Edge import Edge
 from classes.Vertex import Vertex
 
 
-class Graphe2:
+class Graphe:
     def __init__(self,vertices: list,edges: list):
         self.vertices = []
         self.edges = []
@@ -49,7 +49,7 @@ class Graphe2:
 
     @staticmethod
     def emptyGraph():
-        graphe = Graphe2([],[])
+        graphe = Graphe([],[])
         return graphe
 
     def addVertex(self, vertex:Vertex):
@@ -69,7 +69,7 @@ class Graphe2:
 
 
     def randomGraphGenerator(self):
-        graphe = Graphe2.emptyGraph()
+        graphe = Graphe.emptyGraph()
         graphe = self.remplirSommetsAleatoire(graphe)
         graphe = self.remplirAretesAleatoire(graphe)
         graphe.display()
@@ -101,7 +101,7 @@ class Graphe2:
         vertices = graphe.getAllVertices()
         tailleGraphe = len(vertices)
         nbMaxArete = math.ceil(tailleGraphe * (tailleGraphe - 1) / 2)
-        for i in range(random.randint(0, nbMaxArete)):
+        for i in range(random.randint(2, nbMaxArete)):
             weight = random.randint(0,100) # on genere le poid aleatoire de  1 a 100
             ## partie de la liaison des sommets :
             random1 = random.randint(0,tailleGraphe-1)
@@ -143,19 +143,6 @@ class Graphe2:
             marquages.append(i.marquage)
         print("Marquages : ",marquages)
 
-
-    def disjkstra(self):
-        exclusionList = []
-        for i in range(self.nbVertices()):
-            currentVertice = self.vertices[i]
-            currentNeighbors = self.getAllEdgesByVertex(currentVertice)
-            verticesNeighbors = self.getAllNeighborsVertices(currentVertice)
-            for j in range(len(currentNeighbors)):
-                verticesNeighbors[j].marquage += currentVertice.marquage
-                if currentNeighbors[j].weight < verticesNeighbors[j].marquage and verticesNeighbors[j] not in exclusionList:
-                    verticesNeighbors[j].marquage = currentNeighbors[j].weight
-            exclusionList.append(currentVertice)
-
     def noeudLePlusProche(self,vertex):
         neighbors = self.getAllEdgesByVertex(vertex)
         listPoidsVoisin = [i.weight for i in neighbors]
@@ -169,27 +156,9 @@ class Graphe2:
         else : noeudLePlusProche = sommet1
         return ([noeudLePlusProche, poidVoisinLePlusProche]) # on renvoie le sommet de l'arete different du sommet donne (car l'un de deux est forcement le sommet donnee)l'arete du voisin le plus proche
 
-
-    def algoGlouton(self):
-        noeudsReference = self.getAllVertices()
-        poidsTotal = 0
-        noeuds = copy.copy(noeudsReference) # en python les variables sont des liaisons vers les pointeurs, donc un pop d'une liste d'une variable supprime aussi dans le vrai objet
-        chemins = []
-        noeudDep = noeuds[0]
-        areteUtilisable = copy.copy(self.edges)
-        for i in range(len(noeudsReference)):
-            voisinPlusProche = self.noeudLePlusProche(noeudDep)
-        
-            noeuds.remove(voisinPlusProche[0])
-            chemins.append(voisinPlusProche[0].name)
-            poidsTotal+=voisinPlusProche[1]
-            noeudDep = voisinPlusProche[0]
-
-        return [chemins,poidsTotal]
-
             
 
-    def disjkstra2(self):
+    def disjkstra(self):
         sommets = self.getAllVertices() # récupération de tous les sommets du graphe
         matriceTotale =[]
         # assignation des voisins et poids
@@ -279,3 +248,11 @@ class Graphe2:
             arrayTotal.append(ligne)
 
         return arrayTotal
+
+    def generateGrapheCompletAleatoire(self,sommets):
+        for i in range(len(sommets)):
+            self.vertices.append(Vertex(sommets[i]))
+        for i in range(len(self.vertices)-1):
+            self.edges.append(Edge((self.vertices[i],self.vertices[i+1]),random.randint(1,100)))
+        
+

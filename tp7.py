@@ -1,4 +1,4 @@
-from classes.Graphe2 import Graphe2
+from classes.Graphe import Graphe
 import time
 
 
@@ -7,8 +7,8 @@ vertices = ['A','B','C','D']
 listEdges = [ [ (1,2),5], [(1,3),8 ], [(1,4),12],[ (2,3),7],[(2,4),2 ], [(3,4),3] ]
 listEdges2 = [ [ (1,2),5], [(1,3),8 ] ]
 
-graphe = Graphe2(vertices, listEdges)
-graphe2 = Graphe2(vertices, listEdges2)
+graphe = Graphe(vertices, listEdges)
+#Graphe = Graphe(vertices, listEdges2)
 
 
 
@@ -19,7 +19,7 @@ graphe2 = Graphe2(vertices, listEdges2)
 #graphe.printMarquage()
 
 print(graphe.isConnexe())
-print(graphe2.isConnexe())
+#print(Graphe.isConnexe())
 
 def measureTime(fct):
     start_time = time.time()
@@ -33,13 +33,19 @@ def measureTime(fct):
 def current_nano_time(nb):
     return nb * 1000000000
 
-dijsktra = graphe.disjkstra2
+#print(graphe.disjkstra())
+
+#print(graphe.matrice2d())
+
+sommets = ['A','B','C','D','E','F','G','H','I','J']
+edges = []
+graphe3 = Graphe([],[])
+graphe3.generateGrapheCompletAleatoire(sommets)
+graphe3.display()
+
+dijsktra = graphe3.disjkstra
 
 
 measureTime(dijsktra)
-
-print(graphe.disjkstra2())
-
-print(graphe.matrice2d())
 
 #graphe.printMarquage()
