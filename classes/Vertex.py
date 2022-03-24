@@ -2,8 +2,6 @@ class Vertex:
     def __init__(self,name: str):
         self.name = name
         self.neighbors = []
-        self.marquage = 110
-        self.estPris = False
         self.matrice = [0]
 
     def display(self):

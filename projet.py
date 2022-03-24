@@ -9,7 +9,7 @@ from itertools import combinations
 import numpy as np
 
 from classes.Edge import Edge
-from classes.Graphe2 import Graphe2
+from classes.Graphe import Graphe
 # from classes.Vertex import Vertex
 #
 #
@@ -119,7 +119,7 @@ print(B.getAllNode())
 print(B.getAllEdges())
 print(B.isConnexe())
 """
-from classes.Graphe2 import Graphe2
+from classes.Graphe import Graphe
 
 """
 vertices = ["Paris","Lyon","Ajaccio"]
@@ -132,7 +132,7 @@ graphe2 = Graphe2(vertices,listEdges)
 graphe3 = Graphe2([],[])
 print(graphe2.randomGraphGenerator())
 """
-graphe3 = Graphe2([],[])
+graphe3 = Graphe([],[])
 graphe3 = graphe3.randomGraphGenerator()
 graphe3.display()
 graphe3.printMarquage()
@@ -140,7 +140,7 @@ graphe3.disjkstra()
 graphe3.printMarquage()
 
 
-grapheComplet = Graphe2(["1","2","3","4"],[()])
+grapheComplet = Graphe(["1","2","3","4"],[()])
 
 
 

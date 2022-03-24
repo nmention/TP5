@@ -38,14 +38,26 @@ def current_nano_time(nb):
 #print(graphe.matrice2d())
 
 sommets = ['A','B','C','D','E','F','G','H','I','J']
+
+sommets2 = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O']
+sommets3 = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T']
 edges = []
 graphe3 = Graphe([],[])
+graphe4 = Graphe([],[])
+graphe5 = Graphe([],[])
 graphe3.generateGrapheCompletAleatoire(sommets)
+graphe4.generateGrapheCompletAleatoire(sommets2)
+graphe5.generateGrapheCompletAleatoire(sommets3)
 graphe3.display()
+graphe5.display()
 
 dijsktra = graphe3.disjkstra
+dijsktra2 = graphe4.disjkstra
+dijsktra3 = graphe5.disjkstra
 
 
 measureTime(dijsktra)
+measureTime(dijsktra2)
+measureTime(dijsktra3)
 
 #graphe.printMarquage()
